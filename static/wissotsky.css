@@ -1,0 +1,7 @@
+.wsk_pbar {
+    display: none;
+}
+
+.htmx-request.wsk_pbar {
+    display: block;
+}

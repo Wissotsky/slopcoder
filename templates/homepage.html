@@ -1,0 +1,64 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slopcoder 🤑💸🔥</title>
+
+    <script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/static/theme/combined.min.css">
+    <link rel="stylesheet" href="/static/theme/skins/hotdog-stand.css">
+
+    <link rel="stylesheet" href="/static/wissotsky.css">
+
+    <script src="https://unpkg.com/hyperscript.org@0.9.13"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/styles/default.min.css">
+    <script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/highlight.min.js"></script>
+
+    <script>
+        document.addEventListener('htmx:afterRequest', function(evt) {
+            hljs.highlightAll();
+        });
+    </script>
+</head>
+<body class="desktop flex-column use-preferred-font">
+    <div class="grow">
+        <main class="margin window active">
+            <div class="title-bar">
+                <div class="title-bar-text">Slopcoder 🤑💸🔥</div>
+            </div>
+            <div class="window-body padding">
+                <div class="grid gap" style="grid-template-columns: min-content auto;">
+                    <div class="flex-column gap" hx-get="/chat_list" hx-target="#dropdown_list" hx-swap="innerHTML" hx-trigger="load">
+                        <input id="chat_id_input" name="chat_id" hx-get="/full_chat" hx-swap="outerHTML" hx-trigger="keyup changed,manualchange" hx-target="#chat_window" type="text" value="Chat name">    
+                        <select size="3" id="dropdown_list" _="on change set the value of #chat_id_input to my value then send manualchange to #chat_id_input">
+                          <option value="Foo" >Options failed to load</option>
+                          <option>Bar</option>
+                          <option>Baz</option>
+                        </select>
+                    </div>     
+                    <form class="flex-column gap" style="width: 100%;" hx-get="/chat" hx-target="#chat_box" hx-swap="afterbegin" hx-include="[name='chat_id']" hx-indicator="#progress_bar" hx-disabled-elt="#msg_button">
+                        <label for="message_input">Write Message</label>
+                        <textarea id="message_input" type="text" name="message"> </textarea>
+                        <button id="msg_button" type="submit">Send Message</button>
+                    </form>
+                </div>
+                <div id="progress_bar" class="wsk_pbar progress-bar"></div>
+            </div>
+
+        </main>
+        
+        <div class="margin window" id="chat_window">
+            <div class="title-bar">
+                <div class="title-bar-text">No chat selected</div>
+            </div>
+
+            <div class="window-body">
+                <div class="padding" id="chat_box">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

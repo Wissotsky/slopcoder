@@ -1,0 +1,25 @@
+<div class="margin window" id="chat_window">
+    <div class="title-bar">
+        <div class="title-bar-text">Chat - {{chat_id}}</div>
+    </div>
+
+    <div class="window-body">
+        <div class="padding" id="chat_box">
+            {% for message in conversation|reverse %}
+                {% if message.role == 'assistant' %}
+                    <fieldset class="padding">
+                        <legend>Slopcoder</legend>
+                        {{ render_markdown(message.content,extensions=['fenced_code']) | safe }}
+                    </fieldset>
+                {% else %}
+                    <fieldset class="padding">
+                        <legend>User</legend>
+                        {{ message.content }}
+                    </fieldset>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+

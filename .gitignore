@@ -10,3 +10,4 @@ wheels/
 .venv
 
 model_files/
+chats_dict.json

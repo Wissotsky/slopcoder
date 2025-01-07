@@ -46,7 +46,7 @@ def chat():
 
     save_chats_to_disk(chats_dict) # TODO: gets wrecked by multithreading
 
-    return render_template('chat_message.html', message_user=message ,message_bot=markdown.markdown(output["choices"][0]["message"]["content"]),extensions=['fenced_code'])
+    return render_template('chat_message.html', message_user=message ,message_bot=markdown.markdown(output["choices"][0]["message"]["content"],extensions=['fenced_code']))
 
 @app.route("/full_chat", methods=['POST','GET'])
 def full_chat():
